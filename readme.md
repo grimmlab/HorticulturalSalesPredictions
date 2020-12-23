@@ -1,7 +1,7 @@
 # TimeSeriesPredictionFramework
 This framework provides a full pipeline for Time Series Predictions using several different classical forecsting as well as Machine Learning algorithms.
-We initially designed it for Horticultural Sales Predictions, see our publication below. Nevertheless, it can be adapted for other datasets as described in the Remarks.
-Providing a dataset with daily observations, you can use several preprocessing methods e.g. for missing value imputation, feature engineering approaches and optimize as well as evaluate different models.
+We initially designed it for Horticultural Sales Predictions, see our publication below. Nevertheless, it can be adapted for other domains and datasets as described in the Remarks.
+Providing a dataset with daily observations, you can use several preprocessing methods, e.g. for missing value imputation or feature engineering, and optimize as well as evaluate different models.
 For more information on the preprocessing, feature engineering and training implementations, we recommend reading our publication.
 
 Currently, the following algorithms are included:
@@ -14,7 +14,7 @@ Currently, the following algorithms are included:
 - Automatic Relevance Determination Regression (ARD)
 - Artificial Neural Networks (ANN)
 - Long short-term memory networks (LSTM)
-- XGBoost
+- XGBoost Regression
 - Gaussian Process Regression (GPR)
 
 ## Provided Datasets
@@ -34,7 +34,7 @@ Otherwise, ANN and LSTM optimization will be performed on CPU.
 
 As an alternative, you can run all programs directly on your machine. 
 The pipeline was developed and tested with Python 3.8 and Ubuntu 20.04.
-All used Python packages and their versions are specified in Configs/packages.txt`
+All used Python packages and their versions are specified in `Configs/packages.txt`.
 
 ## Installation and Operation
 1. Open a Terminal and navigate to the directory where you want to setup the project
@@ -47,9 +47,9 @@ All used Python packages and their versions are specified in Configs/packages.tx
     ```bash
     docker build -t IMAGENAME .
     ```
-5. Run a Docker container based on the created image. Mount the directory where the repository is placed on your machine. If you want to use GPU support, specify the GPUs to mount.
+5. Run an interactive Docker container based on the created image. Mount the directory where the repository is placed on your machine. If you want to use GPU support, specify the GPUs to mount.
     ```bash
-    docker run -it -v REPO_DIRECTORY_LOCAL:REPO_DIRECTORY_DOCKER --gpus=all --name CONTAINERNAME IMAGENAME
+    docker run -it -v PATH/TO/REPO/FOLDER:/REPO/DIRECTORY/IN/CONTAINER --gpus=all --name CONTAINERNAME IMAGENAME
     ```
 6. In the Docker container, navigate to the mounted repository directory
 7. Start one of the optimization scripts with specifying the target variable and train percentage
@@ -58,14 +58,17 @@ All used Python packages and their versions are specified in Configs/packages.tx
    (e.g.: python3 RunXGBOptim.py SoldTulips 0.8)
     ```
    The datasets we provide are based on the target variables *SoldTulips* for *OwnDoc* as well as *PotTotal* and *CutFlowers* for *CashierData*.
-8. You should see outputs regarding the current progress and best values on your Terminal. 
+   
+   For an initial test, `python3 RunESOptim.py SoldTulips 0.8` is a good choice due to its short runtime.
+    
+   You should see outputs regarding the current progress and best values on your Terminal. 
 9. Once all optimization runs are finished, you can find a file with all results in `OptimResults`
 
 You can also quit a running program with `Ctrl+C`. Already finished optimizations will be saved.
 
 ## Remarks
-- The optimization files are named according to important information like the algorithm, target variable, used datasets, featuresets, imputation methods, split percentage and seasonal period
-- The framework is parametrized by the config file `Configs/dataset_specific_config.ini`. There is a `General` section where we specify the *base_dir*, which is currently the same as the repository itself. If you want to move the data and storage of optimization results, you need to adjust the path there. 
+- The optimization file names provide important information like the algorithm, target variable, used datasets, featuresets, imputation methods, split percentage and seasonal period
+- The framework is parametrized by the config file `Configs/dataset_specific_config.ini`. There is a `General` section where we specify the *base_dir*, which is currently the same as the repository itself. If you want to move the data and storage of optimization results, you need to adjust the path there. Be careful with mounting the volume in your Docker container then.
 Furthermore, there is a section for each target variable. Feel free to add a new section, if you want to use the framework for another dataset or change the settings for feature engineering.
 - Furthermore, if you want to use it for another dataset, you may want to adapt the function `get_ready_train_test_lst()` in `training/TrainHelper.py`.
 - Hyperparameter ranges and random sample shares have to be adjusted in the Run script of the specific algorithm.
@@ -74,7 +77,7 @@ Furthermore, there is a section for each target variable. Feel free to add a new
 
 
 ## Contributors
-This pipeline is developed and maintened by members of the [Bioinformatics](www.bit.cs.tum.de) lab of [Prof. Dr. Dominik Grimm](https://bit.cs.tum.de/team/dominik-grimm/):
+This pipeline is developed and maintened by members of the [Bioinformatics](https://bit.cs.tum.de) lab of [Prof. Dr. Dominik Grimm](https://bit.cs.tum.de/team/dominik-grimm/):
 - [Florian Haselbeck, M.Sc.](https://bit.cs.tum.de/team/florian-haselbeck/)
 
 ## Citation
