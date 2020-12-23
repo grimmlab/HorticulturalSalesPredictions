@@ -80,7 +80,7 @@ Beyond that, there is a section for each target variable. Feel free to add a new
 - Furthermore, when using the framework for another dataset, you may want to adapt the function `get_ready_train_test_lst()` in `training/TrainHelper.py`.
 - Hyperparameter ranges and random sample shares have to be adjusted in the `Run*Optim.py` script of the specific algorithm.
 - For the target variables *PotTotal* and *SoldTulips*, we use a second split besides the full dataset. This is automatically included when starting a training script for one of these. See our publication linked below for further details.
-- In the Checkpoints directory, we temporary store checkpoints during ANN and LSTM training. The files should be deleted automatically, if the program is not interrupted.
+- In the `Checkpoints` directory, we temporary store checkpoints during ANN and LSTM training. The files should be deleted automatically, if the program is not interrupted.
 
 
 ## Contributors
