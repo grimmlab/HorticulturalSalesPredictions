@@ -43,7 +43,7 @@ class GaussianProcessRegressionGPFlow(ModelsBaseClass.BaseModel):
         """
         cross_val_score_dict = {}
         if cross_val_call:
-            cross_val_score_dict = self.get_cross_val_score(train=train)
+            cross_val_score_dict, self.model = self.get_cross_val_score(train=train)
         x_train = train.drop(self.target_column, axis=1).values.reshape(-1, train.shape[1]-1)
         y_train = train[self.target_column].values.reshape(-1, 1)
         if self.standardize_x:

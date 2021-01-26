@@ -4,6 +4,7 @@ import numpy as np
 import sklearn
 import torch
 import datetime
+import copy
 
 from evaluation import EvaluationHelper, SimpleBaselines
 from training import TrainHelper
@@ -29,39 +30,51 @@ class BaseModel:
         """
         raise NotImplementedError
 
-    def get_cross_val_score(self, train: pd.DataFrame) -> dict:
+    def get_cross_val_score(self, train: pd.DataFrame) -> tuple:
         """
         Deliver cross validated evaluation scores
         :param train: train set
         :return: dictionary with mean and std of cross validated evaluation scores
         """
+        # backup model so train on full dataset afterwards is independet of cv training
+        backup_model = copy.deepcopy(self.model)
         if train.shape[0] < 80:
             print('Train set too small for Cross Validation')
-            return {}
+            return {}, backup_model
         train = train.copy()
         rmse_lst, mape_lst, smape_lst = [], [], []
         tscv = sklearn.model_selection.TimeSeriesSplit(n_splits=3)
         for train_index, test_index in tscv.split(train):
             cv_train, cv_test = train.loc[train.index[train_index]], train.loc[train.index[test_index]]
             # ES Model with seasonality is only working if n_samples is bigger than seasonality
+            # noinspection PyUnresolvedReferences
             if self.name == 'ExponentialSmoothing' and self.seasonal is not None:
                 if cv_train.shape[0] <= self.seasonal_periods:
                     print('CV train set too small for seasonality')
-                    return {}
-            self.train(train=cv_train)
-            predictions = self.predict(test=cv_test, train=cv_train)
-            rmse_test, mape_test, smape_test = EvaluationHelper.get_all_eval_vals(
-                actual=cv_test[self.target_column], prediction=predictions['Prediction'])
-            rmse_lst.append(rmse_test)
-            mape_lst.append(mape_test)
-            smape_lst.append(smape_test)
+                    continue
+            self.model = copy.deepcopy(backup_model)
+            try:
+                self.train(train=cv_train)
+                predictions = self.predict(test=cv_test, train=cv_train)
+                rmse_test, mape_test, smape_test = EvaluationHelper.get_all_eval_vals(
+                    actual=cv_test[self.target_column], prediction=predictions['Prediction'])
+                rmse_lst.append(rmse_test)
+                mape_lst.append(mape_test)
+                smape_lst.append(smape_test)
+            except:
+                continue
         rmse_mean, mape_mean, smape_mean = \
             np.mean(np.asarray(rmse_lst)), np.mean(np.asarray(mape_lst)), np.mean(np.asarray(smape_lst))
         rmse_std, mape_std, smape_std = \
             np.std(np.asarray(rmse_lst)), np.std(np.asarray(mape_lst)), np.std(np.asarray(smape_lst))
-        return {'cv_rmse_mean': rmse_mean, 'cv_rmse_std': rmse_std,
-                'cv_mape_mean': mape_mean, 'cv_mape_std': mape_std,
-                'cv_smape_mean': smape_mean, 'cv_smape_std': smape_std}
+        cv_dict = {'cv_rmse_mean': rmse_mean, 'cv_rmse_std': rmse_std,
+                   'cv_mape_mean': mape_mean, 'cv_mape_std': mape_std,
+                   'cv_smape_mean': smape_mean, 'cv_smape_std': smape_std}
+        for cv_number in range(len(rmse_lst)):
+            cv_dict['cv_rmse_' + str(cv_number)] = rmse_lst[cv_number]
+            cv_dict['cv_mape_' + str(cv_number)] = mape_lst[cv_number]
+            cv_dict['cv_smape_' + str(cv_number)] = smape_lst[cv_number]
+        return cv_dict, backup_model
 
     def insample(self, train: pd.DataFrame) -> pd.DataFrame:
         """

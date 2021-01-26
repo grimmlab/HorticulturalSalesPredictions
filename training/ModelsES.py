@@ -48,7 +48,7 @@ class ExponentialSmoothing(ModelsBaseClass.BaseModel):
         """
         cross_val_score_dict = {}
         if cross_val_call:
-            cross_val_score_dict = self.get_cross_val_score(train=train)
+            cross_val_score_dict, self.model = self.get_cross_val_score(train=train)
         if (self.power_transformer is not None) or self.log:
             train = TrainHelper.get_transformed_set(dataset=train, target_column=self.target_column,
                                                     power_transformer=self.power_transformer, log=self.log)

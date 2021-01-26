@@ -36,7 +36,7 @@ def run_xgb_optim(target_column: str, split_perc: float, imputation: str, featur
                   'gamma': [0, 1, 10],
                   'alpha': [0, 0.1, 1, 10],
                   'reg_lambda': [0, 0.1, 1, 10],
-                  'osa': [False, True]
+                  'osa': [True]
                   }
 
     # random sample from parameter grid

@@ -58,7 +58,7 @@ class LstmRegression(ModelsBaseClass.BaseModel):
         TrainHelper.init_pytorch_seeds()
         cross_val_score_dict = {}
         if cross_val_call:
-            cross_val_score_dict = self.get_cross_val_score(train=train)
+            cross_val_score_dict, self.model = self.get_cross_val_score(train=train)
         # create train and validation set
         train_loader, x_valid, y_valid = self.create_train_valid_sequence_sets(train=train)
         # run optim loop

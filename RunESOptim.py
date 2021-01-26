@@ -34,7 +34,7 @@ def run_es_optim(target_column: str, split_perc: float, imputation: str):
                   'seasonality': ['add', 'mul', None],
                   'remove_bias': [False, True],
                   'brute': [False, True],
-                  'osa': [False, True],
+                  'osa': [True],
                   'transf': [False, 'log', 'pw']
                   }
     # random sample from parameter grid

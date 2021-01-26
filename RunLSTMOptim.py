@@ -36,7 +36,7 @@ def run_lstm_optim(target_column: str, split_perc: float, imputation: str, featu
                   'lstm_hidden_dim': [5, 10, 50],
                   'lstm_num_layers': [1, 2],
                   'seq_length': [1, 4, seasonal_periods],
-                  'osa': [False, True]
+                  'osa': [True]
                   }
     # random samples from parameter grid
     params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.1)

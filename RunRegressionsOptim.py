@@ -32,7 +32,7 @@ def run_regressions_optim(target_column: str, split_perc: float, algo: str):
                   'featureset': ['full', 'cal', 'stat', 'none'],
                   'dim_reduction': ['None', 'pca'],
                   'normalize': [False, True],
-                  'osa': [False, True]
+                  'osa': [True]
                   }
     # parameters relevant for lasso, ridge and elasticnet
     if algo in ['lasso', 'ridge', 'elasticnet']:

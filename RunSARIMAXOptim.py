@@ -36,7 +36,7 @@ def run_sarimax_optim(target_column: str, split_perc: float, imputation: str, fe
                   'P': [0, 1, 2, 3],
                   'D': [0, 1],
                   'Q': [0, 1, 2, 3],
-                  'osa': [False, True],
+                  'osa': [True],
                   'transf': [False, 'log', 'pw'],
                   'exog': [True],
                   'wi': [True]

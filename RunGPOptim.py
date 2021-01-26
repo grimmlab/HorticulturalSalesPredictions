@@ -90,7 +90,7 @@ def run_gp_optim(target_column: str, split_perc: float, imputation: str, feature
                   'optimizer': [gpflow.optimizers.Scipy()],
                   'standardize_x': [False, True],
                   'standardize_y': [False, True],
-                  'osa': [False, True]
+                  'osa': [True]
                   }
     # random sample from parameter grid
     params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.2)

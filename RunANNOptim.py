@@ -35,7 +35,7 @@ def run_ann_optim(target_column: str, split_perc: float, imputation: str, featur
                   'max_epochs_wo_improvement': [20, 50, 100],
                   'n_hidden': [10, 20, 50, 100],
                   'num_hidden_layer': [1, 2, 3],
-                  'osa': [False, True]
+                  'osa': [True]
                   }
     # random samples from parameter grid
     params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.1)
