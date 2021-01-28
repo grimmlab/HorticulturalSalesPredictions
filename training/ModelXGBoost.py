@@ -41,7 +41,9 @@ class XGBoostRegression(ModelsBaseClass.BaseModel):
         """
         cross_val_score_dict = {}
         if cross_val_call:
-            cross_val_score_dict, self.model = self.get_cross_val_score(train=train)
+            cross_val_score_dict_ts, self.model = self.get_cross_val_score(train=train)
+            cross_val_score_dict_shuf, self.model = self.get_cross_val_score(train=train, normal_cv=True)
+            cross_val_score_dict = {**cross_val_score_dict_ts, **cross_val_score_dict_shuf}
         self.model.fit(X=train.drop([self.target_column], axis=1), y=train[self.target_column])
         return cross_val_score_dict
 

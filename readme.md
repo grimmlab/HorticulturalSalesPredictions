@@ -81,7 +81,11 @@ Beyond that, there is a section for each target variable. Feel free to add a new
 - Hyperparameter ranges and random sample shares have to be adjusted in the `Run*Optim.py` script of the specific algorithm.
 - For the target variables *PotTotal* and *SoldTulips*, we use a second split besides the full dataset. This is automatically included when starting a training script for one of these. See our publication linked below for further details.
 - In the `Checkpoints` directory, we temporary store checkpoints during ANN and LSTM training. The files should be deleted automatically, if the program is not interrupted.
-
+- We currently implemented two forecasting scenarios specified by the parameter `one_step_ahead` of each model: 
+    - if this parameter is set `True`, we perform an evaluation on a rolling forecasting origin with a refit of the model for every new arriving sample
+    - if this parameter is set `False`, we train our model only once on the initial train set and predict for the whole test set
+- With the parameter `cross_val_call` of the `train` methods, cross-validation during training can be activated. For all algorithms, a time series cross-validation is performed. The train set is split in four folds resulting in three runs with the second, third and fourth used for validation and the ones prior to them for training. For the Machine Learning algorithms, we additionally implemented a random permutations cross-validation with five folds and a validation set size of 20 percent. 
+The evaluation metrics on each fold as well as its mean and standard deviation are added to the optimization file.
 
 ## Contributors
 This pipeline is developed and maintened by members of the [Bioinformatics](https://bit.cs.tum.de) lab of [Prof. Dr. Dominik Grimm](https://bit.cs.tum.de/team/dominik-grimm/):

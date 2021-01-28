@@ -55,7 +55,9 @@ class AnnRegression(ModelsBaseClass.BaseModel):
         TrainHelper.init_pytorch_seeds()
         cross_val_score_dict = {}
         if cross_val_call:
-            cross_val_score_dict, self.model = self.get_cross_val_score(train=train)
+            cross_val_score_dict_ts, self.model = self.get_cross_val_score(train=train)
+            cross_val_score_dict_shuf, self.model = self.get_cross_val_score(train=train, normal_cv=True)
+            cross_val_score_dict = {**cross_val_score_dict_ts, **cross_val_score_dict_shuf}
         # create train and validation set
         train_loader, x_valid, y_valid = self.create_train_valid_sets(train=train)
         # run optim loop

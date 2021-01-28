@@ -30,10 +30,11 @@ class BaseModel:
         """
         raise NotImplementedError
 
-    def get_cross_val_score(self, train: pd.DataFrame) -> tuple:
+    def get_cross_val_score(self, train: pd.DataFrame, normal_cv: bool = False) -> tuple:
         """
         Deliver cross validated evaluation scores
         :param train: train set
+        :param normal_cv: specify whether normal cv can be performed
         :return: dictionary with mean and std of cross validated evaluation scores
         """
         # backup model so train on full dataset afterwards is independet of cv training
@@ -43,8 +44,12 @@ class BaseModel:
             return {}, backup_model
         train = train.copy()
         rmse_lst, mape_lst, smape_lst = [], [], []
-        tscv = sklearn.model_selection.TimeSeriesSplit(n_splits=3)
-        for train_index, test_index in tscv.split(train):
+        prefix = 'ts_'
+        splitter = sklearn.model_selection.TimeSeriesSplit(n_splits=3)
+        if normal_cv:
+            splitter = sklearn.model_selection.ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
+            prefix = 'shuf_'
+        for train_index, test_index in splitter.split(train):
             cv_train, cv_test = train.loc[train.index[train_index]], train.loc[train.index[test_index]]
             # ES Model with seasonality is only working if n_samples is bigger than seasonality
             # noinspection PyUnresolvedReferences
@@ -61,19 +66,20 @@ class BaseModel:
                 rmse_lst.append(rmse_test)
                 mape_lst.append(mape_test)
                 smape_lst.append(smape_test)
-            except:
+            except Exception as exc:
+                print(exc)
                 continue
         rmse_mean, mape_mean, smape_mean = \
             np.mean(np.asarray(rmse_lst)), np.mean(np.asarray(mape_lst)), np.mean(np.asarray(smape_lst))
         rmse_std, mape_std, smape_std = \
             np.std(np.asarray(rmse_lst)), np.std(np.asarray(mape_lst)), np.std(np.asarray(smape_lst))
-        cv_dict = {'cv_rmse_mean': rmse_mean, 'cv_rmse_std': rmse_std,
-                   'cv_mape_mean': mape_mean, 'cv_mape_std': mape_std,
-                   'cv_smape_mean': smape_mean, 'cv_smape_std': smape_std}
+        cv_dict = {prefix + 'cv_rmse_mean': rmse_mean, prefix + 'cv_rmse_std': rmse_std,
+                   prefix + 'cv_mape_mean': mape_mean, prefix + 'cv_mape_std': mape_std,
+                   prefix + 'cv_smape_mean': smape_mean, prefix + 'cv_smape_std': smape_std}
         for cv_number in range(len(rmse_lst)):
-            cv_dict['cv_rmse_' + str(cv_number)] = rmse_lst[cv_number]
-            cv_dict['cv_mape_' + str(cv_number)] = mape_lst[cv_number]
-            cv_dict['cv_smape_' + str(cv_number)] = smape_lst[cv_number]
+            cv_dict[prefix + 'cv_rmse_' + str(cv_number)] = rmse_lst[cv_number]
+            cv_dict[prefix + 'cv_mape_' + str(cv_number)] = mape_lst[cv_number]
+            cv_dict[prefix + 'cv_smape_' + str(cv_number)] = smape_lst[cv_number]
         return cv_dict, backup_model
 
     def insample(self, train: pd.DataFrame) -> pd.DataFrame:
