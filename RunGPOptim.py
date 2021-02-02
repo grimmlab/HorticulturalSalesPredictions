@@ -188,7 +188,7 @@ def run_gp_optim(target_column: str, split_perc: float, imputation: str, feature
             print('Got interrupted')
             break
         except Exception as exc:
-            print(exc)
+            # print(exc)
             params_dict = {'dataset': 'Failure', 'featureset': featureset,
                            'imputation': str('None' if imputation is None else imputation),
                            'dim_reduction': str('None' if dim_reduction is None else dim_reduction),
