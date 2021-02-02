@@ -51,9 +51,9 @@ All used Python packages and their versions are specified in `Configs/packages.t
     ```
 5. Run an interactive Docker container based on the created image
     ```bash
-    docker run -it -v PATH/TO/REPO/FOLDER:/REPO/DIRECTORY/IN/CONTAINER --gpus=all --name CONTAINERNAME IMAGENAME
+    docker run -it -v PATH/TO/REPO/FOLDER:/DIRECTORY/IN/CONTAINER --gpus=all --name CONTAINERNAME IMAGENAME
     ```
-    Mount the directory where the repository is placed on your machine.  
+    Mount the directory where the repository is placed on your machine in the Docker container.  
     If you want to use GPU support, specify the GPUs to mount.
 6. In the Docker container, navigate to the to top level of the repository in the mounted directory
 7. Start one of the training scripts with specifying the target variable and train percentage
