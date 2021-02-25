@@ -398,7 +398,7 @@ def get_ready_train_test_lst(dataset: pd.DataFrame, config: configparser.ConfigP
                 FeatureAdder.add_features(dataset=dataset_feat, seasonal_periods=seasonal_periods,
                                           features_for_stats=features_for_stats,
                                           use_calendar_features=False, with_weekday_stats=False,
-                                          lags=[1, 2, 3, 4], windowsize_rolling=4, windowsize_rolling_seas=4)
+                                          lags=[1, 4], windowsize_rolling=4, windowsize_rolling_seas=4)
                 StatisticalFeatures.add_rolling_statistics_features(dataset=dataset_feat, windowsize=2,
                                                                     features=features_for_stats)
                 StatisticalFeatures.add_rolling_seasonal_statistics_features(dataset=dataset_feat,

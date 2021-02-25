@@ -33,7 +33,6 @@ def add_rolling_statistics_features(dataset: pd.DataFrame, windowsize: int, feat
         dataset['stat_' + feat + '_rolling_median' + str(windowsize)] = \
             dataset[feat].shift(1).rolling(windowsize).median()
         dataset['stat_' + feat + '_rolling_max' + str(windowsize)] = dataset[feat].shift(1).rolling(windowsize).max()
-        dataset['stat_' + feat + '_rolling_std' + str(windowsize)] = dataset[feat].shift(1).rolling(windowsize).std()
 
 
 def add_rolling_seasonal_statistics_features(dataset: pd.DataFrame, windowsize: int, features: list,
@@ -60,8 +59,6 @@ def add_rolling_seasonal_statistics_features(dataset: pd.DataFrame, windowsize: 
             dataset[feat].shift(seasonal_periods + 1).rolling(windowsize).median()
         dataset['stat_' + feat + '_rolling_seasonal_max' + str(windowsize)] = \
             dataset[feat].shift(seasonal_periods + 1).rolling(windowsize).max()
-        dataset['stat_' + feat + '_rolling_seasonal_std' + str(windowsize)] = \
-            dataset[feat].shift(seasonal_periods + 1).rolling(windowsize).std()
 
 
 def add_rolling_weekday_statistics_features(dataset: pd.DataFrame, windowsize: int, features: list,
@@ -87,5 +84,3 @@ def add_rolling_weekday_statistics_features(dataset: pd.DataFrame, windowsize: i
                 dataset.loc[indices, feat].shift(1).rolling(windowsize).median()
             dataset.at[indices, 'stat_' + feat + '_weekday_rolling_max' + str(windowsize)] = \
                 dataset.loc[indices, feat].shift(1).rolling(windowsize).max()
-            dataset.at[indices, 'stat_' + feat + '_weekday_rolling_std' + str(windowsize)] = \
-                dataset.loc[indices, feat].shift(1).rolling(windowsize).std()

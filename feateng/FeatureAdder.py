@@ -31,7 +31,7 @@ def add_features(dataset: pd.DataFrame, cols_to_condense: list = None, condensed
     if special_days is None:
         special_days = ['Valentine', 'MothersDay', 'Karfreitag']
     if lags is None:
-        lags = [1, 2, 3, 4, 5, 6, 7, 14]
+        lags = [1, 2, 3, 4, 5, 6, 7]
 
     print('---Starting to add features---')
     if cols_to_condense is not None and condensed_col_name is not None:
