@@ -163,7 +163,7 @@ def run_sarimax_optim(target_column: str, split_perc: float, imputation: str, fe
 if __name__ == '__main__':
     target_column = str(sys.argv[1])
     split_perc = float(sys.argv[2])
-    imputations = [None, 'mean', 'iterative', 'knn']
+    imputations = ['mean', 'iterative', 'knn']
     featuresets = ['full', 'cal', 'stat', 'none']
     imp_feat_combis = TrainHelper.get_imputation_featureset_combis(imputations=imputations, featuresets=featuresets,
                                                                    target_column=target_column)
@@ -176,9 +176,9 @@ if __name__ == '__main__':
         # univariate optimization only done once for each imputation method
         # and only done one time if multiple_nans_raw_set is false as target_column does not contain nans
         univariate = False
-        if str('None' if imputation is None else imputation) != imp_last_run and univariate_not_done:
+        if imputation != imp_last_run and univariate_not_done:
             univariate = True
-            imp_last_run = str('None' if imputation is None else imputation)
+            imp_last_run = imputation
             if multiple_nans_raw_set is False:
                 univariate_not_done = False
         new_pid = os.fork()
