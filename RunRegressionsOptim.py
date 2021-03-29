@@ -48,7 +48,7 @@ def run_regressions_optim(target_column: str, split_perc: float, algo: str):
         param_grid['lambda_1'] = [10**x for x in range(-6, 1)]
         param_grid['lambda_2'] = [10**x for x in range(-6, 1)]
         # random sample from parameter grid: 0.25 share for bayesridge
-        params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.25)
+        params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.2)
         if algo == 'ard':
             param_grid['threshold_lambda'] = [10**x for x in range(2, 6)]
             # random sample from parameter grid: 0.2 share for ard

@@ -40,7 +40,7 @@ def run_xgb_optim(target_column: str, split_perc: float, imputation: str, featur
                   }
 
     # random sample from parameter grid
-    params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.25)
+    params_lst = TrainHelper.random_sample_parameter_grid(param_grid=param_grid, sample_share=0.2)
 
     doc_results = None
     best_rmse = 5000000.0

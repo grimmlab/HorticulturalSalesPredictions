@@ -1,4 +1,9 @@
-# TimeSeriesPredictionFramework
+# HorticulturalSalesPredictions
+
+[![PyTorch 1.7](https://img.shields.io/badge/PyTorch-1.7-FF6F00?logo=pytorch)](https://github.com/pytorch/pytorch/releases/tag/v1.7.0)
+[![Python 3.8](https://img.shields.io/badge/Python-3.8-3776AB)](https://www.python.org/downloads/release/python-388/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This framework provides a full pipeline for Time Series Predictions using several different classical forecsting as well as Machine Learning algorithms.
 We initially designed it for Horticultural Sales Predictions, see our publication below. Nevertheless, it can be adapted for other domains and datasets as described in the Remarks.
 Providing a dataset with daily observations, you can use several preprocessing methods, e.g. for missing value imputation or feature engineering, and optimize as well as evaluate different models.
