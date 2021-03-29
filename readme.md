@@ -4,7 +4,7 @@
 [![Python 3.8](https://img.shields.io/badge/Python-3.8-3776AB)](https://www.python.org/downloads/release/python-388/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This framework provides a full pipeline for Time Series Predictions using several different classical forecsting as well as Machine Learning algorithms.
+This framework provides a full pipeline for Time Series Predictions using several different classical forecasting as well as Machine Learning algorithms.
 We initially designed it for Horticultural Sales Predictions, see our publication below. Nevertheless, it can be adapted for other domains and datasets as described in the Remarks.
 Providing a dataset with daily observations, you can use several preprocessing methods, e.g. for missing value imputation or feature engineering, and optimize as well as evaluate different models.
 For more information on the preprocessing, feature engineering and training implementations, we recommend reading our paper.
@@ -47,7 +47,7 @@ All used Python packages and their versions are specified in `Configs/packages.t
 1. Open a Terminal and navigate to the directory where you want to set up the project
 2. Clone this repository
     ```bash
-    git clone https://github.com/grimmlab/TimeSeriesPredictionFramework
+    git clone https://github.com/grimmlab/HorticulturalSalesPredictions.git
     ```
 3. Navigate to `Configs` after cloning the repository
 4. Build a Docker image using the provided Dockerfile
