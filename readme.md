@@ -97,8 +97,10 @@ This pipeline is developed and maintened by members of the [Bioinformatics](http
 - [Florian Haselbeck, M.Sc.](https://bit.cs.tum.de/team/florian-haselbeck/)
 
 ## Citation
-We are currently working on a paper regarding Horticultural Sales Predictions, for which we developed this framework.
-
 When using this workflow, please cite our publication:
 
-tbd.
+**Horticultural Sales Predictions: Classical Forecasting, Machine Learning and the Influence of External Features**  
+Florian Haselbeck, Jennifer Killinger, Klaus Menrad, Thomas Hannus, Dominik G Grimm  
+*currently under review*  
+
+Keywords: Sales Forecasting, Demand Forecasting, Multivariate Time Series, Horticulture, Comparative Study, Applied Forecasting
