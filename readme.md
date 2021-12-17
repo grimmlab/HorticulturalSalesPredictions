@@ -99,8 +99,8 @@ This pipeline is developed and maintened by members of the [Bioinformatics](http
 ## Citation
 When using this workflow, please cite our publication:
 
-**Horticultural Sales Predictions: Classical Forecasting, Machine Learning and the Influence of External Features**  
+**Machine Learning Outperforms Classical Forecasting on Horticultural Sales Predictions**  
 Florian Haselbeck, Jennifer Killinger, Klaus Menrad, Thomas Hannus, Dominik G Grimm  
-*currently under review*  
+*Machine Learning with Applications (in press)*  
 
 Keywords: Sales Forecasting, Demand Forecasting, Multivariate Time Series, Horticulture, Comparative Study, Applied Forecasting
