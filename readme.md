@@ -93,7 +93,7 @@ Beyond that, there is a section for each target variable. Feel free to add a new
 The evaluation metrics on each fold as well as its mean and standard deviation are added to the optimization file.
 
 ## Contributors
-This pipeline is developed and maintened by members of the [Bioinformatics](https://bit.cs.tum.de) lab of [Prof. Dr. Dominik Grimm](https://bit.cs.tum.de/team/dominik-grimm/):
+This pipeline is developed and maintained by members of the [Bioinformatics](https://bit.cs.tum.de) lab of [Prof. Dr. Dominik Grimm](https://bit.cs.tum.de/team/dominik-grimm/):
 - [Florian Haselbeck, M.Sc.](https://bit.cs.tum.de/team/florian-haselbeck/)
 
 ## Citation
@@ -101,6 +101,7 @@ When using this workflow, please cite our publication:
 
 **Machine Learning Outperforms Classical Forecasting on Horticultural Sales Predictions**  
 Florian Haselbeck, Jennifer Killinger, Klaus Menrad, Thomas Hannus, Dominik G Grimm  
-*Machine Learning with Applications (in press)*  
+*Machine Learning with Applications (2022)* 
+https://doi.org/10.1016/j.mlwa.2021.100239
 
 Keywords: Sales Forecasting, Demand Forecasting, Multivariate Time Series, Horticulture, Comparative Study, Applied Forecasting
