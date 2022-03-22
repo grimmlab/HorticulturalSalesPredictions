@@ -102,6 +102,7 @@ When using this workflow, please cite our publication:
 **Machine Learning Outperforms Classical Forecasting on Horticultural Sales Predictions**  
 Florian Haselbeck, Jennifer Killinger, Klaus Menrad, Thomas Hannus, Dominik G Grimm  
 *Machine Learning with Applications (2022)* 
+
 https://doi.org/10.1016/j.mlwa.2021.100239
 
 Keywords: Sales Forecasting, Demand Forecasting, Multivariate Time Series, Horticulture, Comparative Study, Applied Forecasting
